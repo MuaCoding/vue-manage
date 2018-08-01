@@ -10,6 +10,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "iview": "^3.0.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

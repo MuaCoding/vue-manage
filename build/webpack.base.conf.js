@@ -11,8 +11,9 @@ function resolve (dir) {
 
 
 module.exports = {
-  context: path.resolve(__dirname, '../'),
+  // context: path.resolve(__dirname, '../'),
   entry: {
+    polyfill: 'babel-polyfill',
     app: './src/main.js'
   },
   output: {
@@ -73,17 +74,5 @@ module.exports = {
         loaders: ['style', 'css', 'sass']
       }
     ]
-  },
-  node: {
-    // prevent webpack from injecting useless setImmediate polyfill because Vue
-    // source contains it (although only uses it if it's native).
-    setImmediate: false,
-    // prevent webpack from injecting mocks to Node native modules
-    // that does not make sense for the client
-    dgram: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-    child_process: 'empty'
   }
 }
