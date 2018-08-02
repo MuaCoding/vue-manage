@@ -8,11 +8,11 @@
             <span class="inner-text">管理平台</span>
           </div>
           <div class="layout-nav">
-            <MenuItem name="1" to="/content">
+            <MenuItem name="1" to="/app/stance">
             <Icon type="ios-navigate"></Icon>
             内容管理
             </MenuItem>
-            <MenuItem name="2" to="/system">
+            <MenuItem name="2" to="/app/system">
             <Icon type="ios-analytics"></Icon>
             系统管理
             </MenuItem>

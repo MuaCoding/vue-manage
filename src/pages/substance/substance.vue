@@ -1,15 +1,13 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+  <div>substance content </div>
 </template>
 
 <script>
-
 export default {
-  name: "App"
-};
+  name: 'substance'
+}
 </script>
 
 <style scoped lang="scss" rel="stylesheet/scss">
+
 </style>

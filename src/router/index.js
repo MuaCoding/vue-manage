@@ -1,26 +1,38 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Index from 'components/index/index'
-import System from 'components/system/system'
+import Index from 'pages/index/index'
+import System from 'pages/system/system'
+import Stance from 'pages/stance/stance'
+import Substance from 'pages/substance/substance'
 
 Vue.use(Router)
 
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: '/',
-      redirect: '/index',
+      redirect: '/app/stance',
     },
     {
-      path: '/index',
+      path: '/app',
+      name: 'app',
       component: Index,
-    },
-    {
-      path: '/system',
-      name: 'system',
-      component: System,
+      children: [{
+        path: '/app/system',
+        name: 'system',
+        component: System
+      }, {
+        path: '/app/stance',
+        name: 'stance',
+        component: Stance,
+        children: [{
+          path: '/app/stance/substance',
+          name: 'substance',
+          component: Substance
+        }]
+      }]
     }
+
   ]
 })
