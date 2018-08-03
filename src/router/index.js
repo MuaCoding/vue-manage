@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Index from 'pages/index/index'
-import System from 'pages/system/system'
-import Stance from 'pages/stance/stance'
-import Substance from 'pages/substance/substance'
+import Index from 'components/pages/index/index'
+import System from 'components/pages/system/system'
+import Stance from 'components/pages/stance/stance'
+import Substance from 'components/pages/substance/substance'
+import Login from 'components/pages/login/login'
 
 Vue.use(Router)
 
@@ -32,7 +33,11 @@ export default new Router({
           component: Substance
         }]
       }]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
-
   ]
 })

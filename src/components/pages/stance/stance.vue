@@ -38,8 +38,10 @@
 <script>
 import { getSidebar } from "api/sidebar";
 import { ERR_OK } from "api/config";
+import axios from 'axios';
+
 export default {
-  name: "content",
+  name: "stance",
   data() {
     return {
       sidebars: []
