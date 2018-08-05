@@ -9,8 +9,13 @@
         <Input v-model="formValidate.password" placeholder="请输入密码" size="large"></Input>
       </FormItem>
       <FormItem class="btn-group">
-        <Button type="primary" @click="handleSubmit('formValidate')" size="large"><Icon type="md-checkmark" />登陆</Button>
-        <Button @click="handleReset('formValidate')" style="margin-left: 15px" size="large"><Icon type="refresh" />重置</Button>
+        <Button type="primary" @click="handleSubmit('formValidate')" size="large">
+          <Icon type="md-checkmark" />
+          <span>登陆</span>
+        </Button>
+        <Button @click="handleReset('formValidate')" style="margin-left: 15px" size="large">
+          <Icon type="md-refresh" /><span>重置</span>
+        </Button>
       </FormItem>
     </Form>
   </div>
@@ -84,7 +89,10 @@ export default {
   }
 }
 
-.ivu-btn>.ivu-icon {
-    line-height: 1;
+.ivu-btn .ivu-icon {
+  line-height: 1.5;
+}
+.ivu-btn .ivu-icon + span {
+  margin-left: 4px;
 }
 </style>
