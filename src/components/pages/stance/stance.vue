@@ -52,10 +52,10 @@ export default {
   },
   methods: {
     _getSidebar() {
-      getSidebar().then(res => {
-        if (res.code === ERR_OK) {
+      getSidebar().then((res) => {
+        if (res.Code === 1) {
           console.log(res)
-          this.sidebars = res.data.slider;
+          // this.sidebars = res.data.slider;
         }
       });
     }
