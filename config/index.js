@@ -16,7 +16,8 @@ module.exports = {
         target: 'http://www.easyzx.cn', // 接口域名
         changeOrigin: true, //是否跨域
         pathRewrite: {
-          '^/api': '' //需要rewrite重写的,
+          '^/api': '' //需要rewrite重写的,这种配置表示在接口中不需要api这层目类
+          //'^/api': '/api' //需要rewrite重写的,这种配置表示在接口中保留api这层目类
         }
       }
     },

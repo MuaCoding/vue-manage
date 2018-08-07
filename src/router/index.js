@@ -5,6 +5,7 @@ import Index from 'components/pages/index/index'
 import System from 'components/pages/system/system'
 import Stance from 'components/pages/stance/stance'
 import Substance from 'components/pages/substance/substance'
+import Welcome from 'components/pages/welcome/welcome'
 import Login from 'components/pages/login/login'
 
 Vue.use(Router)
@@ -28,7 +29,11 @@ export default new Router({
         name: 'stance',
         component: Stance,
         children: [{
-          path: '/app/stance/substance',
+          path: '/app/stance/welcome',
+          name: 'welcome',
+          component: Welcome
+        },{
+          path: '/app/stance/substance/:pid/:cid',
           name: 'substance',
           component: Substance
         }]
