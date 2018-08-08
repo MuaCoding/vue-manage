@@ -1,5 +1,5 @@
 <template>
-  <div>substance content </div>
+  <div>substance content</div>
 </template>
 
 <script>

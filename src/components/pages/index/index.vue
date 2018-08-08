@@ -1,6 +1,6 @@
 <template>
 
-  <div class="layout">
+  <div class="layout" v-if="completed">
     <Layout>
       <Header>
         <Menu mode="horizontal" theme="dark" active-name="1">
@@ -29,7 +29,27 @@
 
 <script>
 export default {
-  name: "index"
+  name: "index",
+  data() {
+    return {
+      completed: false
+    };
+  },
+  mounted() {
+    if (sessionStorage.getItem("UserName")) {
+      this.completed = true;
+    } else {
+      this.completed = false;
+      this.$Modal.error({
+        title: "错误信息",
+        content: "您的用户状态已失效，请前往登录页面重新登录",
+        onOk: () => {
+          this.$router.replace("/login");
+        }
+      });
+    }
+  },
+  methods: {}
 };
 </script>
 
