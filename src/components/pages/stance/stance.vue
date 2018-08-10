@@ -15,7 +15,8 @@
               </MenuItem>
             </MenuGroup>
             <MenuGroup :title="group.Name" v-for="group in sidebars" :key="group.ID">
-              <MenuItem :name="item.ID" :to="`/app/stance/substance/${item.PID}/${item.ID}`" v-for="item in group.sides" :key="item.ID"> {{item.Name}}
+              <!-- :to="`/app/stance/substance/${item.PID}/${item.ID}`" -->
+              <MenuItem :name="item.ID" @click.native="goLink(item)" v-for="item in group.sides" :key="item.ID"> {{item.Name}}
               </MenuItem>
             </MenuGroup>
 
@@ -51,7 +52,7 @@ export default {
         if (res.Code === 1) {
           this.sidebars = BuildHierarchy(res.data, 1);
         } else if (res.Code == -1) {
-          sessionStorage.setItem("UserName", '');
+          sessionStorage.setItem("UserName", "");
           this.$Modal.error({
             title: "错误信息",
             content: "您的用户状态已失效，请前往登录页面重新登录",
@@ -62,6 +63,11 @@ export default {
         }
       });
     },
+    goLink(item) {
+      this.$router.push({
+        path: `/app/stance/substance/${item.PID}/${item.ID}`
+      });
+    }
   }
 };
 </script>
