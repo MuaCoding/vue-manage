@@ -2,8 +2,13 @@
   <div class="list-group" v-if="completed">
     <h1 class="page-title">首页轮播</h1>
     <div class="action-bar">
+      <Button type="primary" size="large" icon="md-add">新增轮播图</Button>
     </div>
-    <Table stripe border ellipsis :columns="type" :data="conList"></Table>
+    <Table stripe border ellipsis="true" size="large" :columns="type" :data="conList"></Table>
+    <div style="text-align: center; margin-top: 20px;">
+      <Page :total="conList.length" show-elevator />
+    </div>
+
   </div>
 </template>
 
@@ -19,27 +24,49 @@ export default {
       type: [
         {
           title: "#",
-          key: "ID"
+          key: "ID",
+          align: "center"
         },
         {
           title: "标题",
-          key: "Name"
+          key: "Name",
+          align: "center"
         },
         {
           title: "图片",
-          key: "Img"
+          key: "Img",
+          align: "center"
         },
         {
           title: "排序",
-          key: "OrderNum"
+          key: "OrderNum",
+          align: "center"
         },
         {
           title: "地址",
-          key: "Url"
+          key: "Url",
+          align: "center"
         },
         {
           title: "操作",
-          key: "operation"
+          key: "operation",
+          align: "center",
+          render: (h, params) => {
+            return h("Dropdown", [
+              h(
+                "a",
+                {
+                  on: {}
+                },
+                "选项"
+              )
+              // h("Icon",{
+              //   props: {
+              //     type: "ios-arrow-down"
+              //   }
+              // })
+            ]);
+          }
         }
       ],
       conList: []
@@ -91,4 +118,18 @@ export default {
 </script>
 
 <style scoped lang="scss" rel="stylesheet/scss">
+.ivu-layout-content {
+  h1.page-title {
+    line-height: 40px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+}
+
+.list-group {
+  .action-bar {
+    margin-bottom: 30px;
+    width: 100%;
+  }
+}
 </style>
