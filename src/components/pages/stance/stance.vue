@@ -1,22 +1,18 @@
 <template>
   <Layout :style="{padding: '0 50px'}">
     <Breadcrumb :style="{margin: '16px 0'}">
-      <!-- <BreadcrumbItem>Home</BreadcrumbItem>
-        <BreadcrumbItem>Components</BreadcrumbItem>
-        <BreadcrumbItem>Layout</BreadcrumbItem> -->
     </Breadcrumb>
     <Content :style="{padding: '24px 0', minHeight: '280px', background: '#fff'}">
       <Layout>
         <Sider hide-trigger :style="{background: '#fff'}">
-          <Menu active-name="welcome" width="auto">
+          <Menu ref="menu" :active-name="activemenu" width="auto">
 
             <MenuGroup title="管理平台">
-              <MenuItem name="welcome" :to="`/app/stance/welcome`"> 欢迎页
+              <MenuItem :name="0" :to="`/app/stance/welcome`"> 欢迎页
               </MenuItem>
             </MenuGroup>
             <MenuGroup :title="group.Name" v-for="group in sidebars" :key="group.ID">
-              <!-- :to="`/app/stance/substance/${item.PID}/${item.ID}`" -->
-              <MenuItem :name="item.ID" @click.native="goLink(item)" v-for="item in group.sides" :key="item.ID"> {{item.Name}}
+              <MenuItem :name="item.ID" @click.native="goLink(item)" v-for="item in group.sides" :key="item.ID">{{item.Name}}
               </MenuItem>
             </MenuGroup>
 
@@ -40,17 +36,29 @@ export default {
   name: "stance",
   data() {
     return {
-      sidebars: []
+      sidebars: [],
+      activemenu: 0
     };
   },
   created() {
     this._getSidebar();
   },
+  mounted() {
+    this.menuList();
+  },
   methods: {
+    menuList() {
+      this.$route.params.cid ? this.activemenu = Number(this.$route.params.cid) : this.activemenu = 0;
+    },
     _getSidebar() {
       getSidebar().then(res => {
         if (res.Code === 1) {
           this.sidebars = BuildHierarchy(res.data, 1);
+          // 激活选中
+          this.$nextTick(() => {
+            this.$refs.menu.updateOpened();
+            this.$refs.menu.updateActiveName();
+          });
         } else if (res.Code == -1) {
           sessionStorage.setItem("UserName", "");
           this.$Modal.error({

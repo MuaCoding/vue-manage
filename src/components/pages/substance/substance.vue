@@ -1,14 +1,49 @@
 <template>
-  <!-- <Table stripe :columns="columns1" :data="data1"></Table> -->
+  <div class="list-group" v-if="completed">
+    <h1 class="page-title">首页轮播</h1>
+    <div class="action-bar">
+    </div>
+    <Table stripe border ellipsis :columns="type" :data="conList"></Table>
+  </div>
 </template>
 
 <script>
 import { getContentList } from "api/content";
+import { BuildHierarchy } from "common/js/buildHierarchy";
 
 export default {
   name: "substance",
   data() {
-    return {};
+    return {
+      completed: false,
+      type: [
+        {
+          title: "#",
+          key: "ID"
+        },
+        {
+          title: "标题",
+          key: "Name"
+        },
+        {
+          title: "图片",
+          key: "Img"
+        },
+        {
+          title: "排序",
+          key: "OrderNum"
+        },
+        {
+          title: "地址",
+          key: "Url"
+        },
+        {
+          title: "操作",
+          key: "operation"
+        }
+      ],
+      conList: []
+    };
   },
   created() {
     this._getDetail();
@@ -20,9 +55,20 @@ export default {
         return;
       }
       getContentList(this.$route.params.cid).then(res => {
-        console.log(res);
         if (res.Code === 1) {
-          // this.sidebars = BuildHierarchy(res.data, 1);
+          if (res.detail.length == 1) {
+          } else if (res.detail.length > 1) {
+            this.completed = true;
+            if (!this.$route.params.pid) {
+              this.$router.push("/");
+              return;
+            }
+            var data = BuildHierarchy(
+              res.detail,
+              Number(this.$route.params.pid)
+            );
+            this.conList = data[0].sides;
+          }
         } else if (res.Code == -1) {
           sessionStorage.setItem("UserName", "");
           this.$Modal.error({

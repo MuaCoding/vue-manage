@@ -1,5 +1,17 @@
 @import "variable.scss";
 
+:root {
+  font-size: .75em; //(12/16)针对所有屏幕，但更大的屏幕会被覆盖
+}
+
+@media(min-width: 800px){
+  font-size: .875em;
+}
+
+@media(min-width: 1200px){
+  font-size: 1em;
+}
+
 body, html {
   background-color: $background-color;
 }

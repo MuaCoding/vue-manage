@@ -4,13 +4,11 @@ export function BuildHierarchy(arry, type) {
   // find the top level nodes and hash the children based on parent
   for (var i = 0; i < arry.length; i++) {
     var item = arry[i],
-      p = item.PID,
+      p = Number(item.PID),
       //关键步骤，查找根节点
       target = p === type ? roots : (sides[p] || (sides[p] = []));
-
     target[target.length] = item;
   }
-
   // function to recursively build the tree
   var findChildren = function(parent) {
     if (sides[parent.ID]) {
