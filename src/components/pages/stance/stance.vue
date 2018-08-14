@@ -18,7 +18,7 @@
 
           </Menu>
         </Sider>
-        <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
+        <Content :style="{padding: '5px 24px 80px', minHeight: '280px', background: '#fff'}">
           <router-view></router-view>
         </Content>
       </Layout>

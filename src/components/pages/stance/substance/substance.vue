@@ -2,11 +2,11 @@
   <div class="list-group" v-if="completed">
     <h1 class="page-title">首页轮播</h1>
     <div class="action-bar">
-      <Button type="primary" size="large" icon="md-add">新增轮播图</Button>
+      <Button type="primary" size="large" icon="md-add" @click="creater()">新增轮播图</Button>
     </div>
-    <Table stripe border ellipsis="true" size="large" :columns="type" :data="conList"></Table>
+    <Table stripe border size="large" :columns="type" :data="conList"></Table>
     <div style="text-align: center; margin-top: 20px;">
-      <Page :total="conList.length" show-elevator />
+      <Page :total="conList.length" show-elevator/>
     </div>
 
   </div>
@@ -25,7 +25,7 @@ export default {
         {
           title: "#",
           key: "ID",
-          align: "center"
+          align: "center",
         },
         {
           title: "标题",
@@ -52,19 +52,37 @@ export default {
           key: "operation",
           align: "center",
           render: (h, params) => {
-            return h("Dropdown", [
-              h(
-                "a",
-                {
-                  on: {}
-                },
-                "选项"
-              )
-              // h("Icon",{
-              //   props: {
-              //     type: "ios-arrow-down"
-              //   }
-              // })
+            return h("Dropdown", { props: { trigger: "click" } }, [
+              h("a", {}, [
+                h("span", { style: { marginRight: "5px" } }, "选项"),
+                h("Icon", { props: { type: "ios-arrow-down" } })
+              ]),
+              h("DropdownMenu", { slot: "list" }, [
+                h(
+                  "DropdownItem",
+                  {
+                    nativeOn: {
+                      click: name => {
+                        this.modify(params.row);
+                      }
+                    }
+                  },
+                  "修改"
+                )
+              ]),
+              h("DropdownMenu", { slot: "list" }, [
+                h(
+                  "DropdownItem",
+                  {
+                    nativeOn: {
+                      click: name => {
+                        this.delete(params.row);
+                      }
+                    }
+                  },
+                  "删除"
+                )
+              ])
             ]);
           }
         }
@@ -107,6 +125,15 @@ export default {
           });
         }
       });
+    },
+    modify(item) {
+      console.log(item)
+    },
+    delete(item) {
+
+    },
+    creater(){
+
     }
   },
   watch: {

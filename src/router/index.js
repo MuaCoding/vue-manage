@@ -4,8 +4,9 @@ import Router from 'vue-router'
 import Index from 'components/pages/index/index'
 import System from 'components/pages/system/system'
 import Stance from 'components/pages/stance/stance'
-import Substance from 'components/pages/substance/substance'
-import Welcome from 'components/pages/welcome/welcome'
+import Substance from 'components/pages/stance/substance/substance'
+import Welcome from 'components/pages/stance/welcome/welcome'
+import Create from 'components/pages/stance/create/create'
 import Login from 'components/pages/login/login'
 
 Vue.use(Router)
@@ -32,10 +33,14 @@ export default new Router({
           path: '/app/stance/welcome',
           name: 'welcome',
           component: Welcome
-        },{
+        }, {
           path: '/app/stance/substance/:pid/:cid',
           name: 'substance',
           component: Substance
+        }, {
+          path: '/app/stance/create/:pid',
+          name: 'create',
+          component: Create
         }]
       }]
     },

@@ -1,5 +1,11 @@
 @import "variable.scss";
 
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
 :root {
   font-size: .75em; //(12/16)针对所有屏幕，但更大的屏幕会被覆盖
 }
