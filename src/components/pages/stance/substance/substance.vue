@@ -1,5 +1,5 @@
 <template>
-  <div class="list-group" v-if="completed">
+  <div class="list-group" v-if="completed&&conList.length > 1">
     <h1 class="page-title">首页轮播</h1>
     <div class="action-bar">
       <Button type="primary" size="large" icon="md-add" @click="creater()">新增轮播图</Button>
@@ -8,7 +8,28 @@
     <div style="text-align: center; margin-top: 20px;">
       <Page :total="conList.length" show-elevator/>
     </div>
-
+  </div>
+  <div class="list-group" v-else="!completed&&conList.length == 1">
+    <Form label-position="left" :label-width="100">
+      <FormItem label="所属名称">
+        <Input size="large"></Input>
+      </FormItem>
+      <FormItem label="类别">
+        <Input size="large"></Input>
+      </FormItem>
+      <FormItem label="排序">
+        <Input size="large"></Input>
+      </FormItem>
+      <FormItem label="网站Url">
+        <Input size="large"></Input>
+      </FormItem>
+      <FormItem label="图片">
+        <Input></Input>
+      </FormItem>
+      <FormItem label="发布内容">
+        <Input></Input>
+      </FormItem>
+    </Form>
   </div>
 </template>
 
@@ -25,7 +46,7 @@ export default {
         {
           title: "#",
           key: "ID",
-          align: "center",
+          align: "center"
         },
         {
           title: "标题",
@@ -102,6 +123,7 @@ export default {
       getContentList(this.$route.params.cid).then(res => {
         if (res.Code === 1) {
           if (res.detail.length == 1) {
+            this.completed = false;
           } else if (res.detail.length > 1) {
             this.completed = true;
             if (!this.$route.params.pid) {
@@ -127,14 +149,10 @@ export default {
       });
     },
     modify(item) {
-      console.log(item)
+      console.log(item);
     },
-    delete(item) {
-
-    },
-    creater(){
-
-    }
+    delete(item) {},
+    creater() {}
   },
   watch: {
     $route(to, from) {
